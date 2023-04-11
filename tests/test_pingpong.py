@@ -1,5 +1,3 @@
-import unittest
-
 from pingpong.pingpong import PingPong
 from pingpong.alpaca import AlpacaPromptFmt
 from pingpong.gradio import GradioAlpacaChatPPManager

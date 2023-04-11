@@ -23,9 +23,9 @@ class PPManager:
   def pop_pingpong(self):
     return self.pingpongs.pop()
 
-  def build_prompts(self, fmt: PromptFmt):
+  def build_prompts(self, from_idx: int, fmt: PromptFmt):
     pass
 
-  def build_uis(self, fmt: UIFmt):
+  def build_uis(self, from_idx: int, fmt: UIFmt):
     pass
     
