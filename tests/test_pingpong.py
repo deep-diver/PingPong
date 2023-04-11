@@ -36,4 +36,8 @@ class TestPingpong():
 
 ### Response: pong-1"""
         assert prompts == answers
+
+        uis = pp_manager.build_uis()
+        answers = [("ping-0", "pong-0"), ("ping-1", "pong-1")]
+        assert uis == answers        
             
