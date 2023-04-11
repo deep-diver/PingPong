@@ -3,6 +3,15 @@ from pingpong.pingpong import PromptFmt
 
 class AlpacaPromptFmt(PromptFmt):
   @classmethod
+  def ctx(cls, context):
+    if context is None or context == "":
+      return ""
+    else:
+      return f"""### Input: {context}
+
+"""
+
+  @classmethod
   def prompt(cls, pingpong):
     return f"""### Instruction: {pingpong.ping}
 
@@ -10,12 +19,7 @@ class AlpacaPromptFmt(PromptFmt):
 
 class AlpacaChatPPManager(PPManager):
   def build_prompts(self, from_idx: int=0, fmt: PromptFmt=AlpacaPromptFmt):
-    if self.ctx == "":
-      results = ""
-    else:
-      results = f"""Input: {self.ctx}
-
-"""
+    results = fmt.ctx(self.ctx)
 
     for idx, pingpong in enumerate(self.pingpongs[from_idx:]):
       print(idx)

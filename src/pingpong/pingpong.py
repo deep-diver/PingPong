@@ -5,6 +5,10 @@ class PingPong:
 
 class PromptFmt:
   @classmethod
+  def ctx(cls, context):
+    pass
+
+  @classmethod
   def prompt(cls, pingpong):
     pass
 
