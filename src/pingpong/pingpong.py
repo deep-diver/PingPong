@@ -14,7 +14,8 @@ class UIFmt:
     pass
 
 class PPManager:
-  def __init__(self):
+  def __init__(self, ctx: str=""):
+    self.ctx = ctx
     self.pingpongs = []
 
   def add_pingpong(self, pingpong):
