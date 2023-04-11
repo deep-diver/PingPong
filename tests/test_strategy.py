@@ -1,6 +1,6 @@
 from pingpong.pingpong import PingPong
 from pingpong.gradio import GradioAlpacaChatPPManager
-from context.strategy import CtxAutoSummaryStrategy
+from context.auto_summary_strategy import CtxAutoSummaryStrategy
 
 class TestStrategy():
     def test_auto_summary_strategy(self):
