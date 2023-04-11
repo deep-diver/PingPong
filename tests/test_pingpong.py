@@ -2,15 +2,15 @@ import unittest
 
 from pingpong.pingpong import PingPong
 from pingpong.alpaca import AlpacaPromptFmt
-from pingpong.gradio import GradioChatPPManager
+from pingpong.gradio import GradioAlpacaChatPPManager
 
 class TestPingpong():
-    def test_single_gradio_pingpong(self):
+    def test_single_gradio_alpaca_pingpong(self):
         pp = PingPong("hello", "world")
-        pp_manager = GradioChatPPManager()
+        pp_manager = GradioAlpacaChatPPManager()
         pp_manager.add_pingpong(pp)
 
-        prompts = pp_manager.build_prompts(AlpacaPromptFmt)
+        prompts = pp_manager.build_prompts()
         answers = f"""### Instruction: hello
 
 ### Response: world"""
@@ -21,13 +21,13 @@ class TestPingpong():
         assert uis == answers
 
     def test_multi_gradio_pingpong(self):
-        pp_manager = GradioChatPPManager()
+        pp_manager = GradioAlpacaChatPPManager()
 
         for i in range(2):
             pp = PingPong(f"ping-{i}", f"pong-{i}")
             pp_manager.add_pingpong(pp)
-        
-        prompts = pp_manager.build_prompts(AlpacaPromptFmt)
+
+        prompts = pp_manager.build_prompts()
         answers = f"""### Instruction: ping-0
 
 ### Response: pong-0
