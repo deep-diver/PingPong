@@ -7,10 +7,13 @@ class GradioChatUIFmt(UIFmt):
     return (pingpong.ping, pingpong.pong)
 
 class GradioAlpacaChatPPManager(AlpacaChatPPManager):
-  def build_uis(self, from_idx: int=0, fmt: UIFmt=GradioChatUIFmt):
+  def build_uis(self, from_idx: int=0, to_idx: int=-1, fmt: UIFmt=GradioChatUIFmt):
+    if to_idx == -1 or to_idx >= len(self.pingpongs):
+      to_idx = len(self.pingpongs)
+
     results = []
 
-    for pingpong in self.pingpongs[from_idx:]:
+    for pingpong in self.pingpongs[from_idx:to_idx]:
       results.append(fmt.ui(pingpong))
 
     return results

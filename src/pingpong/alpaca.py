@@ -18,13 +18,17 @@ class AlpacaPromptFmt(PromptFmt):
 ### Response: {pingpong.pong}"""
 
 class AlpacaChatPPManager(PPManager):
-  def build_prompts(self, from_idx: int=0, fmt: PromptFmt=AlpacaPromptFmt):
+  def build_prompts(self, from_idx: int=0, to_idx: int=-1, fmt: PromptFmt=AlpacaPromptFmt):
+    if to_idx == -1 or to_idx >= len(self.pingpongs):
+      to_idx = len(self.pingpongs)
+
     results = fmt.ctx(self.ctx)
 
-    for idx, pingpong in enumerate(self.pingpongs[from_idx:]):
+    for idx, pingpong in enumerate(self.pingpongs[from_idx:to_idx]):
+      print(idx)
       results += fmt.prompt(pingpong)
 
-      if idx != len(self.pingpongs[from_idx:])-1:
+      if from_idx+idx != to_idx-1:
         results += """
 
 """
