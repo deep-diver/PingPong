@@ -1,9 +1,14 @@
 from setuptools import setup, find_packages
 
+with open("README.md", "r", encoding="utf-8") as f:
+    long_description = f.read()
+
 setup(
     name='bingbong',
-    version='0.1',
+    version='0.1.2',
     description='Ping pong management library for LLM applied application',
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     author='chansung park',
     author_email='deep.diver.csp@gmail.com',
     url='https://github.com/deep-diver/PingPong',

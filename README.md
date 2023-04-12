@@ -1,37 +1,57 @@
 # PingPong
 
+<p align="center">
+    <img width="200" src="https://raw.githubusercontent.com/deep-diver/PingPong/main/assets/logo.png">
+</p>
+
 PingPong is a simple library to manage pings(prompt) and pongs(response). The main purpose of this library is to manage histories and contexts in LLM applied applications such as ChatGPT.
 
 The basic motivations behind this project are:
 - Abstract prompt and response so that any UIs and Prompt formats can be adopted
 - Abstract context management strategies to apply any number of context managements
 
-Below shows a simple example with Gradio(UI) and Alpaca(Prompt):
+## Installation
+
+```shell
+$ pip install bingbong
+```
+
+## Example usage
+
 ```python
-ui_answers = [("ping-0", "pong-0"), ("ping-1", "pong-1")]
-prompt_answers = f"""### Instruction: ping-0
+from pingpong import PingPong
+from pingpong.gradio import GradioAlpacaChatPPManager
+from pingpong.context import CtxAutoSummaryStrategy
+from pingpong.context import CtxLastWindowStrategy
+from pingpong.context import CtxSearchWindowStrategy
 
-### Response: pong-0
+```python
+ppmanager = GradioAlpacaChatPPManager()
+strategies = [
+    CtxAutoSummaryStrategy(2),
+    CtxLastWindowStrategy(1),
+    CtxSearchWindowStrategy(1)
+]
 
-### Instruction: ping-1
+for i in range(3):
+    ppmanager.add_pingpong(PingPong(f"ping-{i}", f"pong-{i}"))
 
-### Response: pong-1"""
+    for strategy in strategies:
+        if isinstanceof(strategy, CtxAutoSummaryStrategy):
+            sum_req, to_sum_prompt = strategy(ppmanager)
 
-pp_manager = GradioAlpacaChatPPManager()
-strategy = CtxAutoSummaryStrategy(2)
+            if sum_req is True:
+                # enough prompts are accumulated
+                ...
+        elif isinstanceof(strategy, CtxLastWindowStrategy):
+            last_convs = strategy(ppmanager)
 
-for i in range(2):
-    pp = PingPong(f"ping-{i}", f"pong-{i}")
-    pp_manager.add_pingpong(pp)
-
-prompts = pp_manager.build_prompts()
-assert prompts == prompt_answers
-
-uis = pp_manager.build_uis()
-assert uis == ui_answers
-
-sum_req, to_summarize = strategy(pp_manager)
-assert sum_req == True
-assert to_summarize == prompt_answers
-assert strategy.last_idx == 2
+            # I am only interested in the last 1 conversations
+            ...
+        elif isinstanceof(strategy, CtxSearchWindowStrategy):
+            for cur_win in strategy(ppmanager):
+                # looking the entire conversation through
+                # a sliding window, size of 1
+                # find out relevant history to the recent conversation
+                ...
 ```
