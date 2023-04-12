@@ -22,7 +22,6 @@ class AlpacaChatPPManager(PPManager):
     results = fmt.ctx(self.ctx)
 
     for idx, pingpong in enumerate(self.pingpongs[from_idx:]):
-      print(idx)
       results += fmt.prompt(pingpong)
 
       if idx != len(self.pingpongs[from_idx:])-1:
