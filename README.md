@@ -25,7 +25,6 @@ from pingpong.context import CtxAutoSummaryStrategy
 from pingpong.context import CtxLastWindowStrategy
 from pingpong.context import CtxSearchWindowStrategy
 
-```python
 ppmanager = GradioAlpacaChatPPManager()
 strategies = [
     CtxAutoSummaryStrategy(2),
