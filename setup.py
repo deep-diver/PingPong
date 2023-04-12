@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as f:
 
 setup(
     name='bingbong',
-    version='0.1.3',
+    version='0.1.4',
     description='Ping pong management library for LLM applied application',
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -13,7 +13,7 @@ setup(
     author_email='deep.diver.csp@gmail.com',
     url='https://github.com/deep-diver/PingPong',
     install_requires=[],
-    packages=['pingpong'],
+    packages=['pingpong', 'pingpong.context'],
     package_dir={'':'src'},
     keywords=['LLM', 'pingpong', 'prompt', 'context', 'management'],
     python_reuqires='>=3.8',
