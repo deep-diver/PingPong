@@ -57,3 +57,7 @@ for i in range(3):
                 # find out relevant history to the recent conversation
                 ...
 ```
+
+## Todos
+
+- [ ] Add an working example with Gradio application
