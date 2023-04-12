@@ -1,7 +1,7 @@
-from pingpong.pingpong import PingPong
+from pingpong import PingPong
 from pingpong.gradio import GradioAlpacaChatPPManager
-from context.auto_summary_strategy import CtxAutoSummaryStrategy
-from context.last_window_strategy import CtxLastWindowStrategy
+from pingpong.context import CtxAutoSummaryStrategy
+from pingpong.context import CtxLastWindowStrategy
 
 
 class TestStrategy():

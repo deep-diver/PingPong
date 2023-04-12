@@ -1,5 +1,4 @@
-from pingpong.pingpong import PingPong
-from pingpong.alpaca import AlpacaPromptFmt
+from pingpong import PingPong
 from pingpong.gradio import GradioAlpacaChatPPManager
 
 class TestPingpong():

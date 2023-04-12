@@ -1,5 +1,5 @@
 from pingpong.pingpong import PPManager
-from context.strategy import CtxStrategy
+from pingpong.context.strategy import CtxStrategy
 
 class CtxAutoSummaryStrategy(CtxStrategy):
     def __init__(self, max_pingpongs: int):
