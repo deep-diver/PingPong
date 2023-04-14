@@ -31,10 +31,15 @@ class PPManager:
       self.pingpongs.append(PingPong(ping, None))
       return True
     return False
-    
 
   def add_pong(self, pong):
+    self.replace_last_pong(pong)
+
+  def replace_last_pong(self, pong):
     self.pingpongs[-1].pong = pong
+
+  def append_pong(self, piece_pong):
+    self.pingpongs[-1].pong += piece_pong
 
   def add_pingpong(self, pingpong):
     self.pingpongs.append(pingpong)

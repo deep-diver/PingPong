@@ -30,7 +30,6 @@ class DollyChatPPManager(PPManager):
 ### Instruction:
 {ping}
 {fmt.ctx(self.ctx)}
-### Response:
 """
       return prompts
 

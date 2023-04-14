@@ -7,7 +7,7 @@ class AlpacaPromptFmt(PromptFmt):
     if context is None or context == "":
       return ""
     else:
-      return f"""### Input: {context}
+      return f"""### Input:{context}
 
 """
 
@@ -24,11 +24,9 @@ class AlpacaChatPPManager(PPManager):
     if allowed:
       prompts = f"""Below is an instruction that describes a task. Write a response that appropriately completes the request.
 
-### Instruction:
-{ping}
+### Instruction:{ping}
 {fmt.ctx(self.ctx)}
-### Response:
-"""
+### Response:"""
       return prompts
 
     return None
@@ -38,10 +36,9 @@ class AlpacaChatPPManager(PPManager):
     if to_idx == -1 or to_idx >= len(self.pingpongs):
       to_idx = len(self.pingpongs)
 
-    results = fmt.ctx(self.ctx)
+    results = ""
 
     for idx, pingpong in enumerate(self.pingpongs[from_idx:to_idx]):
-      print(idx)
       results += fmt.prompt(pingpong)
 
       if from_idx+idx != to_idx-1:

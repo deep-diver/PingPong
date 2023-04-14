@@ -15,7 +15,6 @@ hello
 ### Input:
 this is context
 
-### Response:
 """
         print(result)
         assert result == answers
@@ -28,7 +27,6 @@ this is context
 ### Instruction:
 hello
 
-### Response:
 """
         assert result == answers
         assert pp_manager.add_ping("hello2") is None
@@ -40,7 +38,6 @@ hello
 ### Instruction:
 hello2
 
-### Response:
 """
         assert result == answers
         assert pp_manager.add_ping("hello3") is None
@@ -62,9 +59,7 @@ hello2
         assert uis == answers
 
         pp_manager.ctx = "this is context"
-        answers = """### Input: this is context
-
-### Instruction: hello
+        answers = """### Instruction: hello
 
 ### Response: world"""
         prompts = pp_manager.build_prompts()
