@@ -1,24 +1,27 @@
 from pingpong.pingpong import PPManager
 from pingpong.pingpong import PromptFmt
 
-class AlpacaPromptFmt(PromptFmt):
+class DollyPromptFmt(PromptFmt):
   @classmethod
   def ctx(cls, context):
     if context is None or context == "":
       return ""
     else:
-      return f"""### Input: {context}
-
+      return f"""
+### Input:
+{context}
 """
 
   @classmethod
   def prompt(cls, pingpong):
-    return f"""### Instruction: {pingpong.ping}
+    return f"""### Instruction:
+{pingpong.ping}
 
-### Response: {"" if pingpong.pong is None else pingpong.pong}"""
+### Response:
+{"" if pingpong.pong is None else pingpong.pong}"""
 
-class AlpacaChatPPManager(PPManager):
-  def add_ping(self, ping, fmt: PromptFmt=AlpacaPromptFmt):
+class DollyChatPPManager(PPManager):
+  def add_ping(self, ping, fmt: PromptFmt=DollyPromptFmt):
     allowed = super().add_ping(ping, fmt)
 
     if allowed:
@@ -33,8 +36,7 @@ class AlpacaChatPPManager(PPManager):
 
     return None
 
-
-  def build_prompts(self, from_idx: int=0, to_idx: int=-1, fmt: PromptFmt=AlpacaPromptFmt):
+  def build_prompts(self, from_idx: int=0, to_idx: int=-1, fmt: PromptFmt=DollyPromptFmt):
     if to_idx == -1 or to_idx >= len(self.pingpongs):
       to_idx = len(self.pingpongs)
 

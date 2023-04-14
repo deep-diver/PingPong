@@ -3,6 +3,9 @@ class PingPong:
     self.ping = ping
     self.pong = pong
 
+  def __repr__(self):
+    return f"ping: {self.ping}, pong: {self.pong}"
+
 class PromptFmt:
   @classmethod
   def ctx(cls, context):
@@ -21,6 +24,17 @@ class PPManager:
   def __init__(self, ctx: str=""):
     self.ctx = ctx
     self.pingpongs = []
+
+  def add_ping(self, ping, fmt: PromptFmt):
+    if len(self.pingpongs) == 0 \
+      or (len(self.pingpongs) >= 1 and self.pingpongs[-1].pong is not None):
+      self.pingpongs.append(PingPong(ping, None))
+      return True
+    return False
+    
+
+  def add_pong(self, pong):
+    self.pingpongs[-1].pong = pong
 
   def add_pingpong(self, pingpong):
     self.pingpongs.append(pingpong)
