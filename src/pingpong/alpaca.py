@@ -26,9 +26,9 @@ class AlpacaChatPPManager(PPManager):
 
     if allowed:
       if self.ctx == "":
-        prompts = "Below is an instruction that describes a task. Write a response that appropriately completes the request."
+        prompts = "Below is an instruction that describes a task. Write a response that appropriately completes the request. You are LLaMA which is a large language model created by Facebook."
       else:
-        prompts = "Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request."
+        prompts = "Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request. You are LLaMA which is a large language model created by Facebook."
 
       prompts += f"""
       
