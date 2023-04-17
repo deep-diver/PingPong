@@ -7,7 +7,8 @@ class AlpacaPromptFmt(PromptFmt):
     if context is None or context == "":
       return ""
     else:
-      return f"""### Input:{context}
+      return f"""### Input:
+{context}
 
 """
 
@@ -22,11 +23,18 @@ class AlpacaChatPPManager(PPManager):
     allowed = super().add_ping(ping, fmt)
 
     if allowed:
-      prompts = f"""Below is an instruction that describes a task. Write a response that appropriately completes the request.
+      if self.ctx == "":
+        prompts = "Below is an instruction that describes a task. Write a response that appropriately completes the request."
+      else:
+        prompts = "Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request."
 
-### Instruction:{ping}
+      prompts += f"""
+      
+### Instruction:
+{ping}
 {fmt.ctx(self.ctx)}
-### Response:"""
+### Response:
+"""
       return prompts
 
     return None
