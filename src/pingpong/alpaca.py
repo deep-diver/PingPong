@@ -13,10 +13,12 @@ class AlpacaPromptFmt(PromptFmt):
 """
 
   @classmethod
-  def prompt(cls, pingpong):
-    return f"""### Instruction: {pingpong.ping}
+  def prompt(cls, pingpong, truncate_size):
+    return f"""### Instruction:
+{pingpong.ping[:truncate_size]}
 
-### Response: {"" if pingpong.pong is None else pingpong.pong}"""
+### Response:
+{"" if pingpong.pong is None else pingpong.pong[:truncate_size]}"""
 
 class AlpacaChatPPManager(PPManager):
   def add_ping(self, ping, fmt: PromptFmt=AlpacaPromptFmt):
@@ -40,14 +42,14 @@ class AlpacaChatPPManager(PPManager):
     return None
 
 
-  def build_prompts(self, from_idx: int=0, to_idx: int=-1, fmt: PromptFmt=AlpacaPromptFmt):
+  def build_prompts(self, from_idx: int=0, to_idx: int=-1, fmt: PromptFmt=AlpacaPromptFmt, truncate_size: int=None):
     if to_idx == -1 or to_idx >= len(self.pingpongs):
       to_idx = len(self.pingpongs)
 
     results = ""
 
     for idx, pingpong in enumerate(self.pingpongs[from_idx:to_idx]):
-      results += fmt.prompt(pingpong)
+      results += fmt.prompt(pingpong, truncate_size=truncate_size)
 
       if from_idx+idx != to_idx-1:
         results += """

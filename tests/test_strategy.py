@@ -14,25 +14,35 @@ class TestStrategy():
 			pp = PingPong(f"ping-{i}", f"pong-{i}")
 			pp_manager.add_pingpong(pp)
 
-		answer1 = """### Instruction: ping-0
+		answer1 = """### Instruction:
+ping-0
 
-### Response: pong-0
+### Response:
+pong-0
 
-### Instruction: ping-1
+### Instruction:
+ping-1
 
-### Response: pong-1"""
+### Response:
+pong-1"""
 
-		answer2 = """### Instruction: ping-2
+		answer2 = """### Instruction:
+ping-2
 
-### Response: pong-2
+### Response:
+pong-2
 
-### Instruction: ping-3
+### Instruction:
+ping-3
 
-### Response: pong-3"""
+### Response:
+pong-3"""
 
-		answer3 = """### Instruction: ping-4
+		answer3 = """### Instruction:
+ping-4
 
-### Response: pong-4"""
+### Response:
+pong-4"""
 
 		for idx, win in enumerate(strategy(pp_manager)):
 			if idx == 0:
@@ -44,6 +54,28 @@ class TestStrategy():
 			else:
 				assert True is False
 
+	def test_last_window_strategy_w_truncate(self):
+		pp_manager = GradioAlpacaChatPPManager()
+		strategy = CtxLastWindowStrategy(2)
+
+		pp_manager = GradioAlpacaChatPPManager()
+		for i in range(3):
+			pp = PingPong(f"ping-{i}", f"pong-{i}")
+			pp_manager.add_pingpong(pp)
+
+		answers = """### Instruction:
+pi
+
+### Response:
+po
+
+### Instruction:
+pi
+
+### Response:
+po"""
+		assert strategy(pp_manager, truncate_size=2) == answers
+
 	def test_last_window_strategy(self):
 		pp_manager = GradioAlpacaChatPPManager()
 		strategy = CtxLastWindowStrategy(2)
@@ -52,9 +84,11 @@ class TestStrategy():
 			pp = PingPong(f"ping-{i}", f"pong-{i}")
 			pp_manager.add_pingpong(pp)
 
-		answers = """### Instruction: ping-0
+		answers = """### Instruction:
+ping-0
 
-### Response: pong-0"""
+### Response:
+pong-0"""
 		assert strategy(pp_manager) == answers
 
 		pp_manager = GradioAlpacaChatPPManager()
@@ -62,14 +96,18 @@ class TestStrategy():
 			pp = PingPong(f"ping-{i}", f"pong-{i}")
 			pp_manager.add_pingpong(pp)
 
-		answers = """### Instruction: ping-1
+		answers = """### Instruction:
+ping-1
 
-### Response: pong-1
+### Response:
+pong-1
 
-### Instruction: ping-2
+### Instruction:
+ping-2
 
-### Response: pong-2"""
-		assert strategy(pp_manager) == answers		
+### Response:
+pong-2"""
+		assert strategy(pp_manager) == answers
 
 
 	def test_auto_summary_strategy(self):
@@ -86,13 +124,17 @@ class TestStrategy():
 		pp_manager.add_pingpong(pp)
 
 		sum_req, to_summarize = strategy(pp_manager)
-		to_summarize_answer = """### Instruction: hello
+		to_summarize_answer = """### Instruction:
+hello
 
-### Response: world
+### Response:
+world
 
-### Instruction: hello2
+### Instruction:
+hello2
 
-### Response: world2"""
+### Response:
+world2"""
 		assert sum_req is True
 		assert to_summarize == to_summarize_answer
 		assert strategy.last_idx == 2
@@ -107,13 +149,17 @@ class TestStrategy():
 		pp_manager.add_pingpong(pp)
 
 		sum_req, to_summarize = strategy(pp_manager)
-		to_summarize_answer = """### Instruction: hello3
+		to_summarize_answer = """### Instruction:
+hello3
 
-### Response: world3
+### Response:
+world3
 
-### Instruction: hello4
+### Instruction:
+hello4
 
-### Response: world4"""
+### Response:
+world4"""
 
 		assert sum_req is True
 		assert to_summarize == to_summarize_answer

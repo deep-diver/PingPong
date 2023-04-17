@@ -13,12 +13,12 @@ class DollyPromptFmt(PromptFmt):
 """
 
   @classmethod
-  def prompt(cls, pingpong):
+  def prompt(cls, pingpong, truncate_size):
     return f"""### Instruction:
-{pingpong.ping}
+{pingpong.ping[:truncate_size]}
 
 ### Response:
-{"" if pingpong.pong is None else pingpong.pong}"""
+{"" if pingpong.pong is None else pingpong.pong[:truncate_size]}"""
 
 class DollyChatPPManager(PPManager):
   def add_ping(self, ping, fmt: PromptFmt=DollyPromptFmt):
@@ -35,7 +35,7 @@ class DollyChatPPManager(PPManager):
 
     return None
 
-  def build_prompts(self, from_idx: int=0, to_idx: int=-1, fmt: PromptFmt=DollyPromptFmt):
+  def build_prompts(self, from_idx: int=0, to_idx: int=-1, fmt: PromptFmt=DollyPromptFmt, truncate_size: int=None):
     if to_idx == -1 or to_idx >= len(self.pingpongs):
       to_idx = len(self.pingpongs)
 

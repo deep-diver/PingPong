@@ -47,7 +47,7 @@ class PPManager:
   def pop_pingpong(self):
     return self.pingpongs.pop()
 
-  def build_prompts(self, from_idx: int, to_idx: int, fmt: PromptFmt):
+  def build_prompts(self, from_idx: int, to_idx: int, fmt: PromptFmt, truncate_size: int):
     pass
 
   def build_uis(self, from_idx: int, to_idx: int, fmt: UIFmt):

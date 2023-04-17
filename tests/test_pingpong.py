@@ -49,9 +49,11 @@ hello2
         pp_manager.add_pingpong(pp)        
 
         prompts = pp_manager.build_prompts()
-        answers = """### Instruction: hello
+        answers = """### Instruction:
+hello
 
-### Response: world"""
+### Response:
+world"""
         assert prompts == answers
 
         uis = pp_manager.build_uis()
@@ -59,9 +61,11 @@ hello2
         assert uis == answers
 
         pp_manager.ctx = "this is context"
-        answers = """### Instruction: hello
+        answers = """### Instruction:
+hello
 
-### Response: world"""
+### Response:
+world"""
         prompts = pp_manager.build_prompts()
         assert prompts == answers
 
@@ -71,9 +75,11 @@ hello2
         pp_manager.add_pingpong(pp)
 
         prompts = pp_manager.build_prompts()
-        answers = """### Instruction: hello
+        answers = """### Instruction:
+hello
 
-### Response: world"""
+### Response:
+world"""
         assert prompts == answers
 
         uis = pp_manager.build_uis()
@@ -88,13 +94,17 @@ hello2
             pp_manager.add_pingpong(pp)
 
         prompts = pp_manager.build_prompts()
-        answers = """### Instruction: ping-0
+        answers = """### Instruction:
+ping-0
 
-### Response: pong-0
+### Response:
+pong-0
 
-### Instruction: ping-1
+### Instruction:
+ping-1
 
-### Response: pong-1"""
+### Response:
+pong-1"""
         assert prompts == answers
 
         uis = pp_manager.build_uis()

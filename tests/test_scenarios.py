@@ -21,9 +21,11 @@ class TestScenarios():
                 sum_req, _ = strategy(ppmanager)
                 assert sum_req is False
             elif isinstance(strategy, CtxLastWindowStrategy):
-                answers = """### Instruction: Hello
+                answers = """### Instruction:
+Hello
 
-### Response: Hi, Nice to meet you!"""
+### Response:
+Hi, Nice to meet you!"""
                 assert strategy(ppmanager) == answers
 
         conv2 = PingPong("How are you?", "I am fine. Thank you, and you?")
@@ -34,13 +36,17 @@ class TestScenarios():
                 sum_req, _ = strategy(ppmanager)
                 assert sum_req is False
             elif isinstance(strategy, CtxLastWindowStrategy):
-                answers = """### Instruction: Hello
+                answers = """### Instruction:
+Hello
 
-### Response: Hi, Nice to meet you!
+### Response:
+Hi, Nice to meet you!
 
-### Instruction: How are you?
+### Instruction:
+How are you?
 
-### Response: I am fine. Thank you, and you?"""
+### Response:
+I am fine. Thank you, and you?"""
                 assert strategy(ppmanager) == answers
 
         conv3 = PingPong("I am doing well.", "Good to know :)")
@@ -48,28 +54,38 @@ class TestScenarios():
 
         for strategy in strategies:
             if isinstance(strategy, CtxAutoSummaryStrategy):
-                answers = """### Instruction: Hello
+                answers = """### Instruction:
+Hello
 
-### Response: Hi, Nice to meet you!
+### Response:
+Hi, Nice to meet you!
 
-### Instruction: How are you?
+### Instruction:
+How are you?
 
-### Response: I am fine. Thank you, and you?
+### Response:
+I am fine. Thank you, and you?
 
-### Instruction: I am doing well.
+### Instruction:
+I am doing well.
 
-### Response: Good to know :)"""
+### Response:
+Good to know :)"""
                 sum_req, to_summarize = strategy(ppmanager)
                 assert sum_req is True
                 assert to_summarize == answers
             elif isinstance(strategy, CtxLastWindowStrategy):
-                answers = """### Instruction: How are you?
+                answers = """### Instruction:
+How are you?
 
-### Response: I am fine. Thank you, and you?
+### Response:
+I am fine. Thank you, and you?
 
-### Instruction: I am doing well.
+### Instruction:
+I am doing well.
 
-### Response: Good to know :)"""
+### Response:
+Good to know :)"""
                 assert strategy(ppmanager) == answers
 
         conv4 = PingPong("What do you want to do today?", "I feel like I want to stay at home")
@@ -80,11 +96,15 @@ class TestScenarios():
                 sum_req, to_summarize = strategy(ppmanager)
                 assert sum_req is False
             elif isinstance(strategy, CtxLastWindowStrategy):
-                answers = """### Instruction: I am doing well.
+                answers = """### Instruction:
+I am doing well.
 
-### Response: Good to know :)
+### Response:
+Good to know :)
 
-### Instruction: What do you want to do today?
+### Instruction:
+What do you want to do today?
 
-### Response: I feel like I want to stay at home"""
+### Response:
+I feel like I want to stay at home"""
                 assert strategy(ppmanager) == answers
