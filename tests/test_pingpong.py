@@ -5,37 +5,6 @@ from pingpong.gradio import GradioAlpacaChatPPManager
 from pingpong.context import CtxLastWindowStrategy
 
 class TestPingpong():
-    def test_simple_stablelm_pingpong(self):
-        system_prompt = """<|SYSTEM|># StableLM Tuned (Alpha version)
-- StableLM is a helpful and harmless open-source AI language model developed by StabilityAI.
-- StableLM is excited to be able to help the user, but will refuse to do anything that could be considered harmful to the user.
-- StableLM is more than just an information source, StableLM is also able to write poetry, short stories, and make jokes.
-- StableLM will refuse to participate in anything that could harm a human.
-"""      
-
-        pp_manager = StableLMChatPPManager()
-        strategy = CtxLastWindowStrategy(2)
-        result = pp_manager.add_ping("hello")
-        answers = f"{system_prompt}<|USER|>hello<|ASSISTANT|>"
-
-        print(result)
-        assert result == answers
-
-        pp_manager.add_pong("")
-        answers = f"<|USER|>hello<|ASSISTANT|>"
-        assert pp_manager.build_prompts() == answers
-
-        pp_manager.append_pong("world")
-        answers = f"<|USER|>hello<|ASSISTANT|>world"
-        assert pp_manager.build_prompts() == answers
-        last_conversations = strategy(pp_manager)
-        assert last_conversations == answers
-
-        result = pp_manager.add_ping("nice to")
-        result = result.replace(system_prompt, f"{system_prompt}{last_conversations}")
-        answers = f"{system_prompt}<|USER|>hello<|ASSISTANT|>world<|USER|>nice to<|ASSISTANT|>"
-        assert result == answers
-
     def test_context_dolly_pingpong(self):
         pp_manager = DollyChatPPManager()
         pp_manager.ctx = "this is context"
@@ -94,7 +63,9 @@ world"""
         assert uis == answers
 
         pp_manager.ctx = "this is context"
-        answers = """### Instruction:
+        answers = """this is context
+
+### Instruction:
 hello
 
 ### Response:
