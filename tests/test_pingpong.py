@@ -2,9 +2,38 @@ from pingpong import PingPong
 from pingpong.dolly import DollyChatPPManager
 from pingpong.stablelm import StableLMChatPPManager
 from pingpong.gradio import GradioAlpacaChatPPManager
+from pingpong.gradio import GradioKoAlpacaChatPPManager
 from pingpong.context import CtxLastWindowStrategy
 
 class TestPingpong():
+    def test_ctx_koalpaca_pingpong(self):
+        pp = PingPong("안녕하세요", "반갑습니다")
+        pp_manager = GradioKoAlpacaChatPPManager()
+        pp_manager.add_pingpong(pp)        
+
+        prompts = pp_manager.build_prompts()
+        answers = """### 질문:
+안녕하세요
+
+### 응답:
+반갑습니다"""
+        assert prompts == answers
+
+        uis = pp_manager.build_uis()
+        answers = [("안녕하세요", "반갑습니다")]
+        assert uis == answers
+
+        pp_manager.ctx = "이것은 문맥이영"
+        answers = """이것은 문맥이영
+
+### 질문:
+안녕하세요
+
+### 응답:
+반갑습니다"""
+        prompts = pp_manager.build_prompts()
+        assert prompts == answers
+
     def test_context_dolly_pingpong(self):
         pp_manager = DollyChatPPManager()
         pp_manager.ctx = "this is context"
