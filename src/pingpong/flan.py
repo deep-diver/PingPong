@@ -29,7 +29,7 @@ class FlanAlpacaChatPPManager(PPManager):
 
       if from_idx+idx != to_idx-1:
         results += """
-
+-----
 """
 
     return results
