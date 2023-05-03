@@ -8,3 +8,5 @@ publish:
 
 clean:
 	rm -rf dist
+	rm -rf src/bingbong.egg-info
+	rm -rf build
