@@ -24,10 +24,7 @@ class StableVicunaChatPPManager(PPManager):
     if to_idx == -1 or to_idx >= len(self.pingpongs):
       to_idx = len(self.pingpongs)
 
-    results = """### Assistant: I am StableVicuna, a large language model created by CarperAI. I am here to chat!"
-
-"""
-    results += fmt.ctx(self.ctx)
+    results = fmt.ctx(self.ctx)
 
     for idx, pingpong in enumerate(self.pingpongs[from_idx:to_idx]):
       results += fmt.prompt(pingpong, truncate_size=truncate_size)
