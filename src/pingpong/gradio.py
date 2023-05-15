@@ -8,6 +8,8 @@ from pingpong.os_stablelm import OSStableLMChatPPManager
 from pingpong.vicuna import VicunaChatPPManager
 from pingpong.stable_vicuna import StableVicunaChatPPManager
 from pingpong.starchat import StarChatPPManager
+from pingpong.mpt import MPTChatPPManager
+from pingpong.redpajama import RedPajamaChatPPManager
 
 class GradioChatUIFmt(UIFmt):
   @classmethod
@@ -96,19 +98,7 @@ class GradioVicunaChatPPManager(VicunaChatPPManager):
     for pingpong in self.pingpongs[from_idx:to_idx]:
       results.append(fmt.ui(pingpong))
 
-    return results  
-
-class GradioStableVicunaChatPPManager(StableVicunaChatPPManager):
-  def build_uis(self, from_idx: int=0, to_idx: int=-1, fmt: UIFmt=GradioChatUIFmt):
-    if to_idx == -1 or to_idx >= len(self.pingpongs):
-      to_idx = len(self.pingpongs)
-
-    results = []
-
-    for pingpong in self.pingpongs[from_idx:to_idx]:
-      results.append(fmt.ui(pingpong))
-
-    return results    
+    return results
   
 class GradioStarChatPPManager(StarChatPPManager):
   def build_uis(self, from_idx: int=0, to_idx: int=-1, fmt: UIFmt=GradioChatUIFmt):
@@ -120,4 +110,28 @@ class GradioStarChatPPManager(StarChatPPManager):
     for pingpong in self.pingpongs[from_idx:to_idx]:
       results.append(fmt.ui(pingpong))
 
-    return results   
+    return results
+  
+class GradioMPTChatPPManager(MPTChatPPManager):
+  def build_uis(self, from_idx: int=0, to_idx: int=-1, fmt: UIFmt=GradioChatUIFmt):
+    if to_idx == -1 or to_idx >= len(self.pingpongs):
+      to_idx = len(self.pingpongs)
+
+    results = []
+
+    for pingpong in self.pingpongs[from_idx:to_idx]:
+      results.append(fmt.ui(pingpong))
+
+    return results
+  
+class GradioRedPajamaChatPPManager(RedPajamaChatPPManager):
+  def build_uis(self, from_idx: int=0, to_idx: int=-1, fmt: UIFmt=GradioChatUIFmt):
+    if to_idx == -1 or to_idx >= len(self.pingpongs):
+      to_idx = len(self.pingpongs)
+
+    results = []
+
+    for pingpong in self.pingpongs[from_idx:to_idx]:
+      results.append(fmt.ui(pingpong))
+
+    return results
