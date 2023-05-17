@@ -8,8 +8,8 @@ class PingPong:
   def __repr__(self):
     return json.dumps(self, default=lambda o: o.__dict__)
 
-  @staticmethod
-  def from_json(json_dict):
+  @classmethod
+  def from_json(cls, json_dict):
     return PingPong(json_dict['ping'], json_dict['pong'])
 
 class PromptFmt:
@@ -62,7 +62,7 @@ class PPManager:
   def __repr__(self):
     return json.dumps(self, default=lambda o: o.__dict__)
 
-  @staticmethod
+  @classmethod
   def from_json(cls, json_str):
     json_dict = json.loads(json_str)
 
