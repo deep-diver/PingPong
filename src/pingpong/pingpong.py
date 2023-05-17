@@ -1,10 +1,16 @@
+import json
+
 class PingPong:
   def __init__(self, ping, pong):
     self.ping = ping
     self.pong = pong
 
   def __repr__(self):
-    return f"ping: {self.ping}, pong: {self.pong}"
+    return json.dumps(self, default=lambda o: o.__dict__)
+
+  @staticmethod
+  def from_json(json_dict):
+    return PingPong(json_dict['ping'], json_dict['pong'])
 
 class PromptFmt:
   @classmethod
@@ -52,4 +58,16 @@ class PPManager:
 
   def build_uis(self, from_idx: int, to_idx: int, fmt: UIFmt):
     pass
+
+  def __repr__(self):
+    return json.dumps(self, default=lambda o: o.__dict__)
+
+  @staticmethod
+  def from_json(cls, json_str):
+    json_dict = json.loads(json_str)
+
+    new_instance = cls()
+    new_instance.ctx = json_dict['ctx']
+    new_instance.pingpongs = [PingPong.from_json(pingpong) for pingpong in json_dict['pingpongs']]
+    return new_instance  
     

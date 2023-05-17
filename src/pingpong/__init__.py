@@ -1,3 +1,3 @@
-__version__ = '0.1.25'
+__version__ = '0.2.1'
 
 from .pingpong import PingPong
