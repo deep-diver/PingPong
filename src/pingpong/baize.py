@@ -1,3 +1,6 @@
+from pingpong.pingpong import PPManager
+from pingpong.pingpong import PromptFmt
+
 class BaizePromptFmt(PromptFmt):
     @classmethod
     def ctx(cls, context):
