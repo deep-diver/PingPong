@@ -39,18 +39,18 @@ for i in range(3):
     ppmanager.add_pingpong(PingPong(f"ping-{i}", f"pong-{i}"))
 
     for strategy in strategies:
-        if isinstanceof(strategy, CtxAutoSummaryStrategy):
+        if isinstance(strategy, CtxAutoSummaryStrategy):
             sum_req, to_sum_prompt = strategy(ppmanager)
 
             if sum_req is True:
                 # enough prompts are accumulated
                 ...
-        elif isinstanceof(strategy, CtxLastWindowStrategy):
+        elif isinstance(strategy, CtxLastWindowStrategy):
             last_convs = strategy(ppmanager)
 
             # I am only interested in the last 1 conversations
             ...
-        elif isinstanceof(strategy, CtxSearchWindowStrategy):
+        elif isinstance(strategy, CtxSearchWindowStrategy):
             for cur_win in strategy(ppmanager):
                 # looking the entire conversation through
                 # a sliding window, size of 1
