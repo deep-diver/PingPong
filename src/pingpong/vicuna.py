@@ -24,11 +24,7 @@ class VicunaChatPPManager(PPManager):
     if to_idx == -1 or to_idx >= len(self.pingpongs):
       to_idx = len(self.pingpongs)
 
-    results = """A chat between a curious user and an artificial intelligence assistant.
-The assistant gives helpful, detailed, and polite answers to the user's questions.
-
-"""
-    results += fmt.ctx(self.ctx)
+    results = fmt.ctx(self.ctx)
 
     for idx, pingpong in enumerate(self.pingpongs[from_idx:to_idx]):
       results += fmt.prompt(pingpong, truncate_size=truncate_size)
