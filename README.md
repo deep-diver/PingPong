@@ -8,8 +8,8 @@ PingPong is a simple library to manage pings(prompt) and pongs(response). The ma
 
 The basic motivations behind this project are:
 - **Abstract prompt and response so that any UIs and Prompt formats can be adopted**
-  - There are a number of instruction-following finetuned language models, but they are fine-tuned with differently crafted datasets. For instance, the Alpaca dataset works when `### Insturction:`, `### Response:`, and `### Input:` are given while StackLLaMA works when `Question:` and `Answer` are given even though the underlying pre-trained LLM is the same LLaMA.
-  - THere are a number of UIs built to interact with language model such as Chatbot. Even with a single example of Chatbot, one could use Gradio while other could use JavaScript based tools, and they represents prompt histories in different data structure. 
+  - There are a number of instruction-following finetuned language models, but they are fine-tuned with differently crafted datasets. For instance, the Alpaca dataset works when `### Instruction:`, `### Response:`, and `### Input:` are given while StackLLaMA works when `Question:` and `Answer:` are given even though the underlying pre-trained LLM is the same LLaMA.
+  - There are a number of UIs built to interact with language model such as Chatbot. Even with a single example of Chatbot, one could use Gradio while other could use JavaScript based tools, and they represents prompt histories in different data structure. 
 - **Abstract context management strategies to apply any number of context managements**
   - There could be a number of strategies to effectively handle context due to the limit of the number of input tokens in language model(usually 4096). It is also possible to mix different strategies.
 
@@ -60,4 +60,5 @@ for i in range(3):
 
 ## Todos
 
-- [ ] Add an working example with Gradio application
+- [ ] Add a working example with Gradio application
+- [ ] Make the documentation more Beginner friendly 
