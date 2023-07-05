@@ -11,6 +11,13 @@ from pingpong.starchat import StarChatPPManager
 from pingpong.mpt import MPTChatPPManager
 from pingpong.redpajama import RedPajamaChatPPManager
 from pingpong.baize import BaizeChatPPManager
+from pingpong.xgen import XGenChatPPManager
+from pingpong.orca_mini import OrcaMiniChatPPManager
+from pingpong.guanaco import GuanacoChatPPManager
+from pingpong.wizard_falcon import WizardFalconChatPPManager
+from pingpong.kullm import KULLMChatPPManager
+
+from pingpong.utils import gradio_build_uis
 
 class GradioChatUIFmt(UIFmt):
   @classmethod
@@ -160,3 +167,23 @@ class GradioBaizeChatPPManager(BaizeChatPPManager):
       results.append(fmt.ui(pingpong))
 
     return results
+  
+class GradioXGenChatPPManager(XGenChatPPManager):
+  def build_uis(self, from_idx: int=0, to_idx: int=-1, fmt: UIFmt=GradioChatUIFmt):
+    return gradio_build_uis(self, from_idx, to_idx, fmt)
+  
+class GradioOrcaMiniChatPPManager(OrcaMiniChatPPManager):
+  def build_uis(self, from_idx: int=0, to_idx: int=-1, fmt: UIFmt=GradioChatUIFmt):
+    return gradio_build_uis(self, from_idx, to_idx, fmt)
+  
+class GradioGuanacoChatPPManager(GuanacoChatPPManager):
+  def build_uis(self, from_idx: int=0, to_idx: int=-1, fmt: UIFmt=GradioChatUIFmt):
+    return gradio_build_uis(self, from_idx, to_idx, fmt)
+  
+class GradioWizardChatPPManager(WizardFalconChatPPManager):
+  def build_uis(self, from_idx: int=0, to_idx: int=-1, fmt: UIFmt=GradioChatUIFmt):
+    return gradio_build_uis(self, from_idx, to_idx, fmt)
+  
+class GradioKULLMChatPPManager(KULLMChatPPManager):
+  def build_uis(self, from_idx: int=0, to_idx: int=-1, fmt: UIFmt=GradioChatUIFmt):
+    return gradio_build_uis(self, from_idx, to_idx, fmt)
