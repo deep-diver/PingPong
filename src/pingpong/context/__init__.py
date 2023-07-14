@@ -1,3 +1,4 @@
 from .auto_summary_strategy import CtxAutoSummaryStrategy
 from .last_window_strategy import CtxLastWindowStrategy
 from .search_window_strategy import CtxSearchWindowStrategy
+from .internet_search_strategy import SimilaritySearcher, InternetSearchStrategy

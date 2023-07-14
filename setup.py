@@ -5,14 +5,19 @@ with open("README.md", "r", encoding="utf-8") as f:
 
 setup(
     name='bingbong',
-    version='0.3.2',
+    version='0.4.2',
     description='Ping pong is a management library for LLM applied applications.',
     long_description=long_description,
     long_description_content_type="text/markdown",
     author='chansung park',
     author_email='deep.diver.csp@gmail.com',
     url='https://github.com/deep-diver/PingPong',
-    install_requires=[],
+    install_requires=[
+        'chromadb',
+        'torch',
+        'transformers',
+        'bs4'
+    ],
     packages=['pingpong', 'pingpong.context'],
     package_dir={'':'src'},
     keywords=['LLM', 'pingpong', 'prompt', 'context', 'management'],
