@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as f:
 
 setup(
     name='bingbong',
-    version='0.4.2',
+    version='0.4.3',
     description='Ping pong is a management library for LLM applied applications.',
     long_description=long_description,
     long_description_content_type="text/markdown",
